@@ -6,37 +6,25 @@ const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID)
 
 const table = base(AIRTABLE_TABLE_NAME)
 
-const getAllProjects = async () => {
-  const projects = await table.select({}).firstPage()
-  return projects.map(({ id, fields }) => transformResponse(id, fields))
+const getAllTodos = async () => {
+  const allTodos = await table.select({}).firstPage()
+  return allTodos.map(({ id, fields }) => transformResponse(id, fields))
 }
 
-const getProject = async (input) => {
-  const project = await table.find(input.id)
-  const { id, fields } = project
-  return transformResponse(id, fields)
-}
-
-const addProject = async (input) => {
-  const { name, description, date } = input.project
-  const project = await table.create([
+const addTodo = async ({ todo }) => {
+  const { name, description, date, assignee, status } = todo
+  const createTodo = await table.create([
     {
       fields: {
         name,
         description,
         date,
+        assignee,
+        status,
       },
     },
   ])
-  const { id, fields } = project[0]
-  return transformResponse(id, fields)
-}
-
-const updateProject = async (input) => {
-  const project = await table.update([
-    input,
-  ])
-  const { id, fields } = project[0]
+  const { id, fields } = createTodo[0]
   return transformResponse(id, fields)
 }
 
@@ -45,9 +33,9 @@ const transformResponse = (id, fields) => ({
   name: fields.name,
   description: fields.description,
   date: fields.date,
+  status: fields.status,
+  assignee: fields.assignee
 })
 
-exports.getAllProjects = getAllProjects
-exports.getProject = getProject
-exports.addProject = addProject
-exports.updateProject = updateProject
+exports.getAllTodos = getAllTodos
+exports.addTodo = addTodo
