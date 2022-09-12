@@ -8,7 +8,37 @@
 </head>
 <body>
 	<h1>GraphQL - AirTable Todos</h1>
-
-	</script>
+  <script>
+    async function loadAllTodos() {
+      const response = await fetch('https://graphql-airtable-stellate.netlify.app/.netlify/functions/graphql', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: `
+            query LoadAllTodos {
+              todos {
+                id
+                name
+              }
+            }
+          `,
+          variables: {}
+        }),
+      });
+  
+      if (!response.ok) {
+        console.error(response);
+        return;
+      }
+  
+      const { data: { todos } } = await response.json();
+      console.log('todo-------------', todos);
+    }
+    
+    loadAllTodos();
+  </script>
 </body>
 </html>
