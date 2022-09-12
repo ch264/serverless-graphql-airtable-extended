@@ -19,9 +19,11 @@
         body: JSON.stringify({
           query: `
             query LoadAllTodos {
-              todos {
-                id
+              getTodos {
                 name
+                description
+                assignee
+                status
               }
             }
           `,
@@ -34,10 +36,10 @@
         return;
       }
   
-      const { data: { todos } } = await response.json();
-      console.log('todo-------------', todos);
+      const { data: { getTodos } } = await response.json();
+      console.log('todo-------------', getTodos);
+     
     }
-    
     loadAllTodos();
   </script>
 </body>
