@@ -17,6 +17,7 @@
   "dependencies": {
     "airtable": "^0.10.1",
     "apollo-server-lambda": "^2.18.2",
-    "graphql": "^14.1.1"
+    "graphql": "^14.1.1",
+    "stellate": "^1.17.0"
   }
 }

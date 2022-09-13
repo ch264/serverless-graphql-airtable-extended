@@ -4,13 +4,15 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>GraphQL, Airtable, Stellate</title>
 </head>
 <body>
-	<h1>GraphQL - AirTable Todos</h1>
+	<h1>GraphQL - AirTable Stellate Todos</h1>
+  <!-- https://graphql-airtable.stellate.sh/ -->
+  <!-- https://graphql-airtable-stellate.netlify.app/.netlify/functions/graphql -->
   <script>
     async function loadAllTodos() {
-      const response = await fetch('https://graphql-airtable-stellate.netlify.app/.netlify/functions/graphql', {
+      const response = await fetch('https://graphql-airtable.stellate.sh/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -38,7 +40,6 @@
   
       const { data: { getTodos } } = await response.json();
       console.log('todo-------------', getTodos);
-     
     }
     loadAllTodos();
   </script>

@@ -1,0 +1,16 @@
+
+
+# GraphCDN configuration. Learn more at https://graphcdn.io/docs/cli
+schema: https://graphql-airtable-stellate.netlify.app/.netlify/functions/graphql
+
+rootTypeNames:
+  query: Query
+  mutation: Mutation
+rules:
+  - types:
+      - Query
+    maxAge: 900
+    swr: 900
+    description: Cache everything (default)
+name: graphql-airtable
+originUrl: https://graphql-airtable-stellate.netlify.app/.netlify/functions/graphql
